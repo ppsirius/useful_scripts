@@ -1,0 +1,50 @@
+// media queries sass
+// ////////////////////////////////////
+
+$phone_min: 590px
+$phone_max: 768px
+$tablet_min: 900px
+$tablet_max: 1024px
+
+=breakpoint($point, $exclusive: false )
+  @if $point == phone
+    @media (max-width: $phone_min)
+      @content
+  @if $point == small
+    @if $exclusive
+      @media (min-width: $phone_min + 1) and (max-width: $phone_max)
+        @content
+    @else
+      @media (max-width: $phone_max)
+        @content
+  @if $point == medium
+    @if $exclusive
+      @media (min-width: $phone_max + 1) and (max-width: $tablet_min)
+        @content
+    @else
+      @media (max-width: $tablet_min)
+        @content
+  @if $point == tablet
+    @if $exclusive
+      @media (min-width: $tablet_min + 1) and (max-width: $tablet_max)
+        @content
+    @else
+      @media (max-width: $tablet_max)
+        @content
+
+// media queries helpers
+=phone
+  +breakpoint(phone)
+    @content
+
+=small($exclusive: false)
+  +breakpoint(small, $exclusive)
+    @content
+
+=medium($exclusive: false)
+  +breakpoint(medium, $exclusive)
+    @content
+
+=tablet($exclusive: false)
+  +breakpoint(tablet, $exclusive)
+    @content
